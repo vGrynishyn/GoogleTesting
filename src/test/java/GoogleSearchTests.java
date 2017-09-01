@@ -3,7 +3,7 @@ import core.LogInformation;
 import core.TestListener;
 import org.junit.Assert;
 import org.testng.annotations.*;
-import pageobjects.GoogleStartPage;
+import pageobjects.impl.GoogleStartPageImpl;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -33,7 +33,7 @@ public class GoogleSearchTests {
     @Test
     @Parameters("pattern")
     public void searchPatternAndCheckBrowserTitleTest(@Optional(PATTERN) String pattern){
-        new GoogleStartPage()
+        new GoogleStartPageImpl()
                 .openWebPage(URL)
                 .searchPattern(pattern)
                 .clickNeededNumOfResultLinks(0);
@@ -46,7 +46,7 @@ public class GoogleSearchTests {
     @Test
     @Parameters({"pattern", "pagesNum", "expectedDomainName"})
     public void tryToFindExpectedDomainNameTest(@Optional(PATTERN) String pattern, @Optional("5") int pagesNum, @Optional(EXPECTED_DOMAIN_NAME) String expectedDomainName){
-        String actualLink = new GoogleStartPage()
+        String actualLink = new GoogleStartPageImpl()
             .openWebPage(URL)
             .searchPattern(pattern)
             .getSearchLinkFromResults(expectedDomainName, pagesNum);
@@ -66,7 +66,7 @@ public class GoogleSearchTests {
 
     @DataProvider(name = "foundLinks", parallel = true)
     public Object[] getLinks() {
-        ArrayList<String> links = (new GoogleStartPage())
+        ArrayList<String> links = (new GoogleStartPageImpl())
                 .openWebPage(URL)
                 .searchPattern(PATTERN+"day")
                 .getResultLinks();
