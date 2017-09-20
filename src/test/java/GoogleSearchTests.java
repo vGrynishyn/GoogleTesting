@@ -9,10 +9,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 
-/**
- * @author vGrynishyn
- * @since 31/09/2017
- */
 
 @Listeners({TestListener.class})
 public class GoogleSearchTests {
@@ -27,10 +23,7 @@ public class GoogleSearchTests {
     }
 
 
-    /*
-     *  Test #1. Open Google. Search for “automation”. Open the first link on search results page. Verify that title contains searched word
-     */
-    @Test
+     @Test
     @Parameters("pattern")
     public void searchPatternAndCheckBrowserTitleTest(@Optional(PATTERN) String pattern){
         new GoogleStartPageImpl()
@@ -40,10 +33,7 @@ public class GoogleSearchTests {
         Assert.assertTrue(Browser.getTitle().contains(pattern));
     }
 
-    /*
-     *  Test #2. Open Google. Search for “automation”. Verify that there is expected domain (“testautomationday.com”) on search results  pages (page: 1-5).
-     */
-    @Test
+   @Test
     @Parameters({"pattern", "pagesNum", "expectedDomainName"})
     public void tryToFindExpectedDomainNameTest(@Optional(PATTERN) String pattern, @Optional("5") int pagesNum, @Optional(EXPECTED_DOMAIN_NAME) String expectedDomainName){
         String actualLink = new GoogleStartPageImpl()
@@ -53,10 +43,6 @@ public class GoogleSearchTests {
         Assert.assertTrue("There is not found expected domain name(page:1-5).", actualLink.contains(expectedDomainName));
     }
 
-    /*
-     * Test #3. Additional test since previous serch with word "automation" does not have expected domain name 'testautomationday.com' in search results.
-     * Open Google. Search for “automation”. Verify that there is expected domain (“testautomationday.com”) on search results  pages (page: 1-5).
-     */
     @Test(dataProvider = "foundLinks")
     @Parameters("linkText")
     public void checkIfGoogleSearchCanFindTestAutomationDayDomainTest(String foundLink){
