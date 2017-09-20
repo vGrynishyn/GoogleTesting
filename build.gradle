@@ -25,7 +25,7 @@ repositories {
 test {
     useTestNG() {
         useDefaultListeners = true
-        suiteXmlFiles << new File("src/test/resources/testngSampleTest.xml")
+        suiteXmlFiles << new File("src/test/java/testngSampleTest.xml")
         setSuiteXmlFiles(suiteXmlFiles)
     }
 }
