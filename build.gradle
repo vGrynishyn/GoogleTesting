@@ -2,6 +2,7 @@ group 'GoogleTest'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
+compileJava.options.encoding = 'UTF-8'
 
 sourceCompatibility = 1.8
 
@@ -20,6 +21,20 @@ sourceSets {
 repositories {
     mavenCentral()
 }
+
+test {
+    useTestNG() {
+        useDefaultListeners = true
+        suiteXmlFiles << new File("src/test/resources/testngSampleTest.xml")
+        setSuiteXmlFiles(suiteXmlFiles)
+    }
+}
+
+//test {
+//    useTestNG() {
+//        if (project.hasProperty('FirstRegression')) {suites 'src/test/java/GoogleSearchTest.xml'}
+//    }
+//}
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
